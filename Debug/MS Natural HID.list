@@ -492,7 +492,8 @@ void register_code(uint8_t x)
  80003dc:	af00      	add	r7, sp, #0
  80003de:	4603      	mov	r3, r0
  80003e0:	71fb      	strb	r3, [r7, #7]
-
+	x = x;
+	x = x;
 }
  80003e2:	bf00      	nop
  80003e4:	370c      	adds	r7, #12
@@ -509,7 +510,8 @@ void unregister_code(uint8_t x)
  80003f0:	af00      	add	r7, sp, #0
  80003f2:	4603      	mov	r3, r0
  80003f4:	71fb      	strb	r3, [r7, #7]
-
+	x = x;
+	x = x;
 }
  80003f6:	bf00      	nop
  80003f8:	370c      	adds	r7, #12

@@ -123,7 +123,7 @@ int main(void)
   {
 	  process_PS2(); // check if new data from keyboard, or LEDs should be updated on keyboard
 	  process_keyboard_USB(); // check if we can send data over USB
-
+	  _delay_ms(1);
 
 	  continue;
 	  //HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);

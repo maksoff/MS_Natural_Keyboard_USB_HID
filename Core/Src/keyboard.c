@@ -28,7 +28,18 @@ uint8_t ready_to_send = 1;
 
 void process_keyboard_USB(void)
 {
-
+	const uint16_t cnt_max = 250;
+	static uint16_t cnt = cnt_max;
+	if (kbuf_has_data())
+	{
+		if (ready_to_send)
+		{
+			cnt = cnt_max;
+			// TODO send this data!
+		}
+		else if (--cnt == 0) // timeout, just push this data
+			ready_to_send = 1;
+	}
 }
 
 void USB_HID_buffer_sent_Callback(void)
