@@ -1,0 +1,5 @@
+gpio.c:43:6:MX_GPIO_Init	40	static
+gpio.c:119:6:data_low	24	static
+gpio.c:130:6:clock_low	24	static
+gpio.c:141:6:data_release	24	static
+gpio.c:150:6:clock_release	24	static

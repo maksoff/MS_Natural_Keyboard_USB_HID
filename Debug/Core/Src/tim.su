@@ -1,0 +1,7 @@
+tim.c:25:6:_delay_ms	16	static
+tim.c:30:6:_delay_us	16	static
+tim.c:36:13:reset_us_counter	4	static
+tim.c:41:16:check_us_counter	16	static
+tim.c:51:6:MX_TIM1_Init	32	static
+tim.c:81:6:HAL_TIM_Base_MspInit	24	static
+tim.c:97:6:HAL_TIM_Base_MspDeInit	16	static
