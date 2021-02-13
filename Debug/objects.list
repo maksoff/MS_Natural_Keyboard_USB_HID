@@ -1,4 +1,5 @@
 "Core/Src/gpio.o"
+"Core/Src/kb_matrix.o"
 "Core/Src/keyboard.o"
 "Core/Src/main.o"
 "Core/Src/ps2.o"

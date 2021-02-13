@@ -31,6 +31,7 @@
 #include "ps2.h"
 #include "gpio.h"
 #include "usbd_conf.h"
+#include "kb_matrix.h"
 
 #define PS2_RESET		0xFF
 #define PS2_ACK         0xFA
@@ -302,7 +303,7 @@ void process_PS2(void)
 		sleep = 0;
 	}
 	if (buf_has_data())
-		buf_pop(); // TODO s here should be data processed
+		matrix_scan(buf_pop());
 	else
 		leds_PS2(leds_data);
 }
