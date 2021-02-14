@@ -1,0 +1,10 @@
+kb_matrix.c:55:9:matrix_rows	4	static
+kb_matrix.c:60:9:matrix_cols	4	static
+kb_matrix.c:65:6:matrix_init	16	static
+kb_matrix.c:139:6:matrix_scan	16	static
+kb_matrix.c:375:9:matrix_is_modified	4	static
+kb_matrix.c:382:9:matrix_is_on	16	static
+kb_matrix.c:387:9:matrix_get_row	16	static
+kb_matrix.c:394:6:matrix_make	16	static
+kb_matrix.c:405:6:matrix_break	16	static
+kb_matrix.c:415:6:matrix_clear	16	static
