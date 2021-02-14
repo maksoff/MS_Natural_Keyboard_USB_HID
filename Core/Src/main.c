@@ -124,22 +124,8 @@ int main(void)
 	  process_PS2(); // check if new data from keyboard, or LEDs should be updated on keyboard
 	  process_keyboard_USB(); // check if we can send data over USB
 	  _delay_ms(1);
-
 	  continue;
-	  //HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-	 // HAL_Delay(250);
-	  _delay_ms(5000);
-	  keyboardhid.MODIFIER = 0x02;  // left Shift
-//	  keyboardhid.KEYCODE1 = 0x04;  // press 'a'
-//	  keyboardhid.KEYCODE2 = 0x05;  // press 'b'
-	  USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&keyboardhid, sizeof (keyboardhid));
-	  HAL_Delay (1000);
-//
-	  keyboardhid.MODIFIER = 0x00;  // shift release
-//	  keyboardhid.KEYCODE1 = 0x00;  // release key
-//	  keyboardhid.KEYCODE2 = 0x00;  // release key
-	  USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&keyboardhid, sizeof (keyboardhid));
-    /* USER CODE END WHILE */
+   /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
