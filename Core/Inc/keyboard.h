@@ -12,12 +12,13 @@ void register_code(uint8_t code);
 void unregister_code(uint8_t code);
 
 /* key report size */
-#define REPORT_SIZE 8
+#define REPORT_SIZE 9
 #define REPORT_KEYS 6
 
 typedef union {
     uint8_t raw[REPORT_SIZE];
     struct {
+    	uint8_t report_id;
         uint8_t mods;
         uint8_t reserved;
         uint8_t keys[REPORT_KEYS];

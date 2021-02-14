@@ -221,6 +221,7 @@ void kbuf_clear(void)
 }
 
 void send_keyboard_report(void){
+	keyboard_report.report_id = 1;
 	keyboard_report.mods = mods;
 	kbuf_push(&keyboard_report);
 }
