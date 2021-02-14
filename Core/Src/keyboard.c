@@ -9,6 +9,8 @@
 #include "keycode.h"
 #include "keyboard.h"
 #include "usbd_hid.h"
+#include "kb_prog.h"
+#include "ps2.h"
 
 uint8_t ready_to_send = 1;
 
@@ -34,12 +36,9 @@ static void send_system(uint16_t data)
 		.report_id = REPORT_ID_SYSTEM,
 		.usage = data
 	};
+	while(!ready_to_send);
 	ready_to_send = 0;
 	USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&report, sizeof (report_extra_t));
-//	if (usbInterruptIsReady3()) {
-//		usbSetInterrupt3((void *)&report, sizeof(report));
-	// TODO
-//	}
 }
 
 static void send_consumer(uint16_t data)
@@ -52,12 +51,9 @@ static void send_consumer(uint16_t data)
 		.report_id = REPORT_ID_CONSUMER,
 		.usage = data
 	};
+	while(!ready_to_send);
 	ready_to_send = 0;
 	USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&report, sizeof (report_extra_t));
-//	if (usbInterruptIsReady3()) {
-//		usbSetInterrupt3((void *)&report, sizeof(report));
-	// TODO
-//	}
 }
 
 
@@ -114,6 +110,10 @@ void register_code(uint8_t code)
     if (code == KC_NO) {
         return;
     }
+    else if IS_PROG(code)
+	{
+    	prog_pressed(code);
+	}
 
     if (code == KC_LOGOFF)
     {
@@ -121,8 +121,8 @@ void register_code(uint8_t code)
     	add_key_byte(KC_L);
     	send_keyboard_report();
     }
-
-    else if IS_KEY(code) {
+    else if IS_KEY(code)
+    {
 	    add_key_byte(code);
 	    send_keyboard_report();
     }
@@ -134,7 +134,7 @@ void register_code(uint8_t code)
 		send_system(KEYCODE2SYSTEM(code));
 	}
     else if IS_CONSUMER(code) {
-        send_consumer(KEYCODE2CONSUMER(code)); //TODO: consumer keys to change volume etc.
+        send_consumer(KEYCODE2CONSUMER(code));
     }
 }
 
@@ -143,6 +143,10 @@ void unregister_code(uint8_t code)
     if (code == KC_NO) {
         return;
     }
+    else if IS_PROG(code)
+	{
+    	prog_released(code);
+	}
 
     if (code == KC_LOGOFF)
     {
@@ -185,6 +189,8 @@ void kbuf_clear(void);
 void process_keyboard_USB(void)
 {
 #define cnt_max (250)
+	static uint32_t blink_t = 0;
+	static uint8_t blinking = 0;
 	static uint16_t cnt = cnt_max;
 	if (kbuf_head != kbuf_tail)
 	{
@@ -198,6 +204,24 @@ void process_keyboard_USB(void)
 		}
 		else if (--cnt == 0) // timeout, just push this data
 			ready_to_send = 1;
+	}
+
+	if (is_prog_long_pressed() || is_prog_in_progress())
+	{
+		if (!blinking)
+		{
+			blinking = 1;
+			blink_t = HAL_GetTick();
+		}
+		else
+		{
+
+		}
+	}
+	else if (blinking)
+	{
+		leds_updated = 1;
+		leds_PS2(leds_data);
 	}
 }
 

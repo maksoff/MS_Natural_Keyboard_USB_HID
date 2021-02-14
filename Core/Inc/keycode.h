@@ -52,11 +52,11 @@ extern const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS];
     { KC_NO,    KC_##K69, KC_##K6A, KC_##K6B, KC_##K6C, KC_NO,    KC_NO,    KC_NO    }, \
     { KC_##K70, KC_##K71, KC_##K72, KC_##K73, KC_##K74, KC_##K75, KC_##K76, KC_##K77 }, \
     { KC_##K78, KC_##K79, KC_##K7A, KC_##K7B, KC_##K7C, KC_##K7D, KC_##K7E, KC_NO    }, \
-    { KC_NO,    KC_##K01, KC_NO,    KC_##K83, KC_NO,    KC_##K05, KC_NO,    KC_##K07 }, \
-    { KC_NO,    KC_NO,    KC_##K0A, KC_##K0B, KC_##K0C, KC_NO,    KC_NO,    KC_NO    }, \
+    { KC_NO,    KC_##K01, KC_NO,    KC_##K83, KC_NO,    KC_##K05, KP_MM,    KC_##K07 }, \
+    { KP_MP,    KC_NO,    KC_##K0A, KC_##K0B, KC_##K0C, KC_NO,    KC_NO,    KC_NO    }, \
     { KC_##K90, KC_##K91, KC_NO,    KC_NO,    KC_##K94, KC_##K95, KC_NO,    KC_NO    }, \
     { KC_##K98, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K9F }, \
-    { KC_##KA0, KC_##KA1, KC_NO,    KC_##KA3, KC_NO,    KC_NO,    KC_NO,    KC_##KA7 }, \
+    { KC_##KA0, KC_##KA1, KC_NO,    KC_##KA3, KC_NO,    KP_MSG,    KC_NO,    KC_##KA7 }, \
     { KC_##KA8, KC_NO,    KC_NO,    KC_##KAB, KC_NO,    KC_NO,    KC_NO,    KC_##KAF }, \
     { KC_##KB0, KC_NO,    KC_##KB2, KC_##K09, KC_##KB4, KC_NO,    KC_##K04, KC_##KB7 }, \
     { KC_##KB8, KC_NO,    KC_##KBA, KC_##KBB, KC_LOGOFF,KC_##K06, KC_NO,    KC_##KBF }, \
@@ -66,7 +66,7 @@ extern const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS];
     { KC_NO,    KC_NO,    KC_##KDA, KC_NO,    KC_NO,    KC_NO,    KC_##KDE, KC_NO    }, \
     { KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
     { KC_NO,    KC_##KE9, KC_NO,    KC_##KEB, KC_##KEC, KC_NO,    KC_NO,    KC_NO    }, \
-    { KC_##KF0, KC_##KF1, KC_##KF2, KC_NO,    KC_##KF4, KC_##KF5, KC_NO,    KC_NO    }, \
+    { KC_##KF0, KC_##KF1, KC_##KF2, KP_MD,    KC_##KF4, KC_##KF5, KC_NO,    KC_NO    }, \
     { KC_##K78, KC_NO,    KC_##KFA, KC_NO,    KC_##KFC, KC_##KFD, KC_##KFE, KC_NO    }, \
 }
 
@@ -183,6 +183,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define IS_ANY(code)             (KC_A         <= (code) && (code) <= 0xFF)
 #define IS_KEY(code)             (KC_A         <= (code) && (code) <= KC_EXSEL)
 #define IS_MOD(code)             (KC_LCTRL     <= (code) && (code) <= KC_RGUI)
+
+#define IS_PROG(code)			 (KP_MD 	   <= (code) && (code) <= KP_MSG)
 
 
 #define IS_SPECIAL(code)         ((0xA5 <= (code) && (code) <= 0xDF) || (0xE8 <= (code) && (code) <= 0xFF))
@@ -619,6 +621,10 @@ enum internal_special_keycodes {
 
     /* Special */
 	KC_LOGOFF            = 0xF0,
+	KP_MD,
+	KP_MP,
+	KP_MM,
+	KP_MSG,
 };
 
 #endif /* INC_KEYCODE_H_ */

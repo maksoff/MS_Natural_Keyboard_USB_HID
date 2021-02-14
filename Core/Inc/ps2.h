@@ -44,6 +44,7 @@
 
 void init_PS2(void);
 void process_PS2(void);
+void leds_PS2(uint8_t led);
 
 uint8_t leds_updated;
 uint8_t leds_data;

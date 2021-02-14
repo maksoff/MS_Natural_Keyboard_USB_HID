@@ -33,7 +33,8 @@ Core/Src/keyboard.o: ../Core/Src/keyboard.c ../Core/Inc/main.h \
  ../USB_DEVICE/Target/usbd_conf.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
+ ../Core/Inc/kb_prog.h ../Core/Inc/ps2.h
 
 ../Core/Inc/main.h:
 
@@ -108,3 +109,7 @@ Core/Src/keyboard.o: ../Core/Src/keyboard.c ../Core/Inc/main.h \
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
+
+../Core/Inc/kb_prog.h:
+
+../Core/Inc/ps2.h:
