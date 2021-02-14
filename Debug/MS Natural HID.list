@@ -35,13 +35,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  15 .debug_ranges 00000fe0  00000000  00000000  0003b3b0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0001b24c  00000000  00000000  0003c390  2**0
+ 16 .debug_macro  0001b24a  00000000  00000000  0003c390  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0001187a  00000000  00000000  000575dc  2**0
+ 17 .debug_line   0001187a  00000000  00000000  000575da  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00090066  00000000  00000000  00068e56  2**0
+ 18 .debug_str    00090066  00000000  00000000  00068e54  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000f8ebc  2**0
+ 19 .comment      0000007b  00000000  00000000  000f8eba  2**0
                   CONTENTS, READONLY
  20 .debug_frame  00004600  00000000  00000000  000f8f38  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -1162,8 +1162,7 @@ void matrix_make(uint8_t code)
  8000790:	f000 f94e 	bl	8000a30 <keymap_key_to_keycode>
  8000794:	4603      	mov	r3, r0
  8000796:	71fb      	strb	r3, [r7, #7]
-		//if (KC_NUMLOCK != code)
-			register_code(code);
+		register_code(code);
  8000798:	79fb      	ldrb	r3, [r7, #7]
  800079a:	4618      	mov	r0, r3
  800079c:	f000 f95e 	bl	8000a5c <register_code>
@@ -1239,10 +1238,7 @@ void matrix_break(uint8_t code)
  8000820:	f000 f906 	bl	8000a30 <keymap_key_to_keycode>
  8000824:	4603      	mov	r3, r0
  8000826:	71fb      	strb	r3, [r7, #7]
-//		if (KC_NUMLOCK == code)
-//			register_code(code);
-//		if (KC_NUMLOCK != code)
-			unregister_code(code);
+		unregister_code(code);
  8000828:	79fb      	ldrb	r3, [r7, #7]
  800082a:	4618      	mov	r0, r3
  800082c:	f000 f9d2 	bl	8000bd4 <unregister_code>

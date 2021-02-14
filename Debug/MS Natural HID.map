@@ -291,7 +291,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x249 Core/Src/keyboard.o
  .debug_macro   0x0000000000000000       0x83 Core/Src/keyboard.o
  .debug_macro   0x0000000000000000       0x3a Core/Src/keyboard.o
- .debug_macro   0x0000000000000000      0x356 Core/Src/keyboard.o
+ .debug_macro   0x0000000000000000      0x354 Core/Src/keyboard.o
  .debug_macro   0x0000000000000000       0xd6 Core/Src/keyboard.o
  .group         0x0000000000000000        0xc Core/Src/main.o
  .group         0x0000000000000000        0xc Core/Src/main.o
@@ -5253,7 +5253,7 @@ OUTPUT(MS Natural HID.elf elf32-littlearm)
  .debug_ranges  0x0000000000000e80       0x50 USB_DEVICE/App/usbd_desc.o
  .debug_ranges  0x0000000000000ed0      0x110 USB_DEVICE/Target/usbd_conf.o
 
-.debug_macro    0x0000000000000000    0x1b24c
+.debug_macro    0x0000000000000000    0x1b24a
  .debug_macro   0x0000000000000000      0x1d6 Core/Src/gpio.o
  .debug_macro   0x00000000000001d6      0xa5a Core/Src/gpio.o
  .debug_macro   0x0000000000000c30      0x21b Core/Src/gpio.o
@@ -5296,72 +5296,72 @@ OUTPUT(MS Natural HID.elf elf32-littlearm)
  .debug_macro   0x0000000000015908      0x20b Core/Src/kb_matrix.o
  .debug_macro   0x0000000000015b13       0x10 Core/Src/kb_matrix.o
  .debug_macro   0x0000000000015b23       0xd6 Core/Src/kb_matrix.o
- .debug_macro   0x0000000000015bf9      0x356 Core/Src/kb_matrix.o
- .debug_macro   0x0000000000015f4f      0x3fb Core/Src/keyboard.o
- .debug_macro   0x000000000001634a       0x46 Core/Src/keyboard.o
- .debug_macro   0x0000000000016390       0x18 Core/Src/keyboard.o
- .debug_macro   0x00000000000163a8       0x3c Core/Src/keyboard.o
- .debug_macro   0x00000000000163e4       0x34 Core/Src/keyboard.o
- .debug_macro   0x0000000000016418       0x16 Core/Src/keyboard.o
- .debug_macro   0x000000000001642e       0x35 Core/Src/keyboard.o
- .debug_macro   0x0000000000016463      0x32a Core/Src/keyboard.o
- .debug_macro   0x000000000001678d       0x10 Core/Src/keyboard.o
- .debug_macro   0x000000000001679d       0x52 Core/Src/keyboard.o
- .debug_macro   0x00000000000167ef       0x1f Core/Src/keyboard.o
- .debug_macro   0x000000000001680e       0x43 Core/Src/keyboard.o
- .debug_macro   0x0000000000016851       0x20 Core/Src/keyboard.o
- .debug_macro   0x0000000000016871      0x1a3 Core/Src/keyboard.o
- .debug_macro   0x0000000000016a14       0x10 Core/Src/keyboard.o
- .debug_macro   0x0000000000016a24       0x1c Core/Src/keyboard.o
- .debug_macro   0x0000000000016a40       0x52 Core/Src/keyboard.o
- .debug_macro   0x0000000000016a92       0x40 Core/Src/keyboard.o
- .debug_macro   0x0000000000016ad2       0x10 Core/Src/keyboard.o
- .debug_macro   0x0000000000016ae2       0x40 Core/Src/keyboard.o
- .debug_macro   0x0000000000016b22       0xd7 Core/Src/keyboard.o
- .debug_macro   0x0000000000016bf9       0x1c Core/Src/keyboard.o
- .debug_macro   0x0000000000016c15       0x3d Core/Src/keyboard.o
- .debug_macro   0x0000000000016c52       0x16 Core/Src/keyboard.o
- .debug_macro   0x0000000000016c68      0x145 Core/Src/keyboard.o
- .debug_macro   0x0000000000016dad       0x16 Core/Src/keyboard.o
- .debug_macro   0x0000000000016dc3       0x16 Core/Src/keyboard.o
- .debug_macro   0x0000000000016dd9       0x29 Core/Src/keyboard.o
- .debug_macro   0x0000000000016e02       0x16 Core/Src/keyboard.o
- .debug_macro   0x0000000000016e18       0x20 Core/Src/keyboard.o
- .debug_macro   0x0000000000016e38       0x60 Core/Src/keyboard.o
- .debug_macro   0x0000000000016e98      0x1c8 Core/Src/keyboard.o
- .debug_macro   0x0000000000017060       0x70 Core/Src/keyboard.o
- .debug_macro   0x00000000000170d0      0x413 Core/Src/main.o
- .debug_macro   0x00000000000174e3       0x2e Core/Src/main.o
- .debug_macro   0x0000000000017511      0x401 Core/Src/ps2.o
- .debug_macro   0x0000000000017912      0x1cc Core/Src/stm32f1xx_hal_msp.o
- .debug_macro   0x0000000000017ade      0x1d6 Core/Src/stm32f1xx_it.o
- .debug_macro   0x0000000000017cb4      0x1bd Core/Src/system_stm32f1xx.o
- .debug_macro   0x0000000000017e71      0x1d6 Core/Src/tim.o
- .debug_macro   0x0000000000018047      0x1e1 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_macro   0x0000000000018228      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_macro   0x00000000000183e5      0x228 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_macro   0x000000000001860d      0x1c9 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.o
- .debug_macro   0x00000000000187d6      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.o
- .debug_macro   0x0000000000018993      0x1cf Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_macro   0x0000000000018b62      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
- .debug_macro   0x0000000000018d1f      0x1be Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
- .debug_macro   0x0000000000018edd      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
- .debug_macro   0x000000000001909a      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.o
- .debug_macro   0x0000000000019257      0x3d9 Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .debug_macro   0x0000000000019630       0x97 Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .debug_macro   0x00000000000196c7       0xfd Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .debug_macro   0x00000000000197c4       0xbd Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .debug_macro   0x0000000000019881       0x56 Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .debug_macro   0x00000000000198d7      0x3c0 Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
- .debug_macro   0x0000000000019c97      0x1ce Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
- .debug_macro   0x0000000000019e65      0x3ca Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
- .debug_macro   0x000000000001a22f      0x3c6 Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o
- .debug_macro   0x000000000001a5f5      0x3f0 USB_DEVICE/App/usb_device.o
- .debug_macro   0x000000000001a9e5       0x40 USB_DEVICE/App/usb_device.o
- .debug_macro   0x000000000001aa25       0x22 USB_DEVICE/App/usb_device.o
- .debug_macro   0x000000000001aa47      0x3fd USB_DEVICE/App/usbd_desc.o
- .debug_macro   0x000000000001ae44       0x1c USB_DEVICE/App/usbd_desc.o
- .debug_macro   0x000000000001ae60      0x3ec USB_DEVICE/Target/usbd_conf.o
+ .debug_macro   0x0000000000015bf9      0x354 Core/Src/kb_matrix.o
+ .debug_macro   0x0000000000015f4d      0x3fb Core/Src/keyboard.o
+ .debug_macro   0x0000000000016348       0x46 Core/Src/keyboard.o
+ .debug_macro   0x000000000001638e       0x18 Core/Src/keyboard.o
+ .debug_macro   0x00000000000163a6       0x3c Core/Src/keyboard.o
+ .debug_macro   0x00000000000163e2       0x34 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016416       0x16 Core/Src/keyboard.o
+ .debug_macro   0x000000000001642c       0x35 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016461      0x32a Core/Src/keyboard.o
+ .debug_macro   0x000000000001678b       0x10 Core/Src/keyboard.o
+ .debug_macro   0x000000000001679b       0x52 Core/Src/keyboard.o
+ .debug_macro   0x00000000000167ed       0x1f Core/Src/keyboard.o
+ .debug_macro   0x000000000001680c       0x43 Core/Src/keyboard.o
+ .debug_macro   0x000000000001684f       0x20 Core/Src/keyboard.o
+ .debug_macro   0x000000000001686f      0x1a3 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016a12       0x10 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016a22       0x1c Core/Src/keyboard.o
+ .debug_macro   0x0000000000016a3e       0x52 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016a90       0x40 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016ad0       0x10 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016ae0       0x40 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016b20       0xd7 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016bf7       0x1c Core/Src/keyboard.o
+ .debug_macro   0x0000000000016c13       0x3d Core/Src/keyboard.o
+ .debug_macro   0x0000000000016c50       0x16 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016c66      0x145 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016dab       0x16 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016dc1       0x16 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016dd7       0x29 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016e00       0x16 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016e16       0x20 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016e36       0x60 Core/Src/keyboard.o
+ .debug_macro   0x0000000000016e96      0x1c8 Core/Src/keyboard.o
+ .debug_macro   0x000000000001705e       0x70 Core/Src/keyboard.o
+ .debug_macro   0x00000000000170ce      0x413 Core/Src/main.o
+ .debug_macro   0x00000000000174e1       0x2e Core/Src/main.o
+ .debug_macro   0x000000000001750f      0x401 Core/Src/ps2.o
+ .debug_macro   0x0000000000017910      0x1cc Core/Src/stm32f1xx_hal_msp.o
+ .debug_macro   0x0000000000017adc      0x1d6 Core/Src/stm32f1xx_it.o
+ .debug_macro   0x0000000000017cb2      0x1bd Core/Src/system_stm32f1xx.o
+ .debug_macro   0x0000000000017e6f      0x1d6 Core/Src/tim.o
+ .debug_macro   0x0000000000018045      0x1e1 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_macro   0x0000000000018226      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_macro   0x00000000000183e3      0x228 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_macro   0x000000000001860b      0x1c9 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.o
+ .debug_macro   0x00000000000187d4      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.o
+ .debug_macro   0x0000000000018991      0x1cf Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_macro   0x0000000000018b60      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
+ .debug_macro   0x0000000000018d1d      0x1be Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+ .debug_macro   0x0000000000018edb      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+ .debug_macro   0x0000000000019098      0x1bd Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.o
+ .debug_macro   0x0000000000019255      0x3d9 Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .debug_macro   0x000000000001962e       0x97 Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .debug_macro   0x00000000000196c5       0xfd Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .debug_macro   0x00000000000197c2       0xbd Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .debug_macro   0x000000000001987f       0x56 Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .debug_macro   0x00000000000198d5      0x3c0 Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
+ .debug_macro   0x0000000000019c95      0x1ce Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
+ .debug_macro   0x0000000000019e63      0x3ca Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
+ .debug_macro   0x000000000001a22d      0x3c6 Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o
+ .debug_macro   0x000000000001a5f3      0x3f0 USB_DEVICE/App/usb_device.o
+ .debug_macro   0x000000000001a9e3       0x40 USB_DEVICE/App/usb_device.o
+ .debug_macro   0x000000000001aa23       0x22 USB_DEVICE/App/usb_device.o
+ .debug_macro   0x000000000001aa45      0x3fd USB_DEVICE/App/usbd_desc.o
+ .debug_macro   0x000000000001ae42       0x1c USB_DEVICE/App/usbd_desc.o
+ .debug_macro   0x000000000001ae5e      0x3ec USB_DEVICE/Target/usbd_conf.o
 
 .debug_line     0x0000000000000000    0x1187a
  .debug_line    0x0000000000000000      0x720 Core/Src/gpio.o
