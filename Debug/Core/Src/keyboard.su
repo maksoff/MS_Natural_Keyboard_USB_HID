@@ -1,6 +1,6 @@
-keyboard.c:29:6:process_keyboard_USB	4	static
-keyboard.c:34:6:USB_HID_buffer_sent_Callback	4	static
-keyboard.c:47:6:kbuf_push	24	static
-keyboard.c:57:19:kbuf_pop	24	static
-keyboard.c:68:9:kbuf_has_data	4	static
-keyboard.c:73:6:kbuf_clear	4	static
+keyboard.c:29:6:process_keyboard_USB	8	static
+keyboard.c:45:6:USB_HID_buffer_sent_Callback	4	static
+keyboard.c:58:6:kbuf_push	24	static
+keyboard.c:68:19:kbuf_pop	24	static
+keyboard.c:79:9:kbuf_has_data	4	static
+keyboard.c:84:6:kbuf_clear	4	static
