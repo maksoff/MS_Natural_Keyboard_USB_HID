@@ -115,6 +115,13 @@ void register_code(uint8_t code)
         return;
     }
 
+    if (code == KC_LOGOFF)
+    {
+    	add_mods(MOD_BIT(KC_LGUI));
+    	add_key_byte(KC_L);
+    	send_keyboard_report();
+    }
+
     else if IS_KEY(code) {
 	    add_key_byte(code);
 	    send_keyboard_report();
@@ -135,6 +142,13 @@ void unregister_code(uint8_t code)
 {
     if (code == KC_NO) {
         return;
+    }
+
+    if (code == KC_LOGOFF)
+    {
+    	del_mods(MOD_BIT(KC_LGUI));
+    	del_key_byte(KC_L);
+    	send_keyboard_report();
     }
     else if IS_KEY(code) {
         del_key_byte(code);
@@ -221,6 +235,7 @@ void kbuf_clear(void)
 }
 
 void send_keyboard_report(void){
+	keyboard_report.report_id = 1;
 	keyboard_report.mods = mods;
 	kbuf_push(&keyboard_report);
 }
