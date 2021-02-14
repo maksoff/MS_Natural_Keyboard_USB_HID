@@ -8,6 +8,9 @@
 #ifndef INC_KEYBOARD_H_
 #define INC_KEYBOARD_H_
 
+void register_code(uint8_t code);
+void unregister_code(uint8_t code);
+
 /* key report size */
 #define REPORT_SIZE 8
 #define REPORT_KEYS 6
@@ -19,7 +22,7 @@ typedef union {
         uint8_t reserved;
         uint8_t keys[REPORT_KEYS];
     };
-} report_keyboard_t;
+}  __attribute__ ((packed)) report_keyboard_t;
 
 void process_keyboard_USB(void);
 uint8_t keymap_key_to_keycode(uint8_t row, uint8_t col);

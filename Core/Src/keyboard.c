@@ -10,6 +10,8 @@
 #include "keyboard.h"
 #include "usbd_hid.h"
 
+uint8_t ready_to_send = 1;
+
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
 void send_keyboard_report(void);
@@ -17,10 +19,10 @@ void send_keyboard_report(void);
 report_keyboard_t keyboard_report;
 uint8_t mods = 0;
 
-typedef struct {
+typedef struct  {
 	uint8_t  report_id;
 	uint16_t usage;
-} __attribute__ ((packed)) report_extra_t;
+} __attribute__ ((packed))  report_extra_t;
 
 static void send_system(uint16_t data)
 {
@@ -32,6 +34,8 @@ static void send_system(uint16_t data)
 		.report_id = REPORT_ID_SYSTEM,
 		.usage = data
 	};
+	ready_to_send = 0;
+	USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&report, sizeof (report_extra_t));
 //	if (usbInterruptIsReady3()) {
 //		usbSetInterrupt3((void *)&report, sizeof(report));
 	// TODO
@@ -48,6 +52,8 @@ static void send_consumer(uint16_t data)
 		.report_id = REPORT_ID_CONSUMER,
 		.usage = data
 	};
+	ready_to_send = 0;
+	USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&report, sizeof (report_extra_t));
 //	if (usbInterruptIsReady3()) {
 //		usbSetInterrupt3((void *)&report, sizeof(report));
 	// TODO
@@ -120,9 +126,9 @@ void register_code(uint8_t code)
     else if IS_SYSTEM(code) {
 		send_system(KEYCODE2SYSTEM(code));
 	}
-    //else if IS_CONSUMER(code) {
-        //host_consumer_send(KEYCODE2CONSUMER(code)); TODO: consumer keys to change volume etc.
-    //}
+    else if IS_CONSUMER(code) {
+        send_consumer(KEYCODE2CONSUMER(code)); //TODO: consumer keys to change volume etc.
+    }
 }
 
 void unregister_code(uint8_t code)
@@ -141,9 +147,9 @@ void unregister_code(uint8_t code)
     else if IS_SYSTEM(code) {
 	    send_system(0);
     }
-    //else if IS_CONSUMER(code) {
-	    //host_consumer_send(0);
-	//}
+    else if IS_CONSUMER(code) {
+    	send_consumer(0);
+	}
 }
 
 
@@ -161,7 +167,6 @@ uint8_t kbuf_has_data(void);
 void kbuf_clear(void);
 /*********************/
 
-uint8_t ready_to_send = 1;
 
 void process_keyboard_USB(void)
 {
@@ -171,6 +176,7 @@ void process_keyboard_USB(void)
 	{
 		if (ready_to_send)
 		{
+			ready_to_send = 0;
 			cnt = cnt_max;
 			// TODO send this data!
 			USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t *)&kbuf[kbuf_tail], sizeof (report_keyboard_t));
