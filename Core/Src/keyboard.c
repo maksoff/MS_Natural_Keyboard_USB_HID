@@ -119,7 +119,7 @@ void register_code(uint8_t code)
     {
     	add_mods(MOD_BIT(KC_LGUI));
     	add_key_byte(KC_L);
-    	send_keyboard_report();
+	    send_keyboard_report();
     }
     else if IS_KEY(code)
     {
@@ -189,8 +189,9 @@ void kbuf_clear(void);
 void process_keyboard_USB(void)
 {
 #define cnt_max (250)
-	static uint32_t blink_t = 0;
+	static uint32_t blink_time = 0;
 	static uint8_t blinking = 0;
+	static uint8_t last_blink = 0;
 	static uint16_t cnt = cnt_max;
 	if (kbuf_head != kbuf_tail)
 	{
@@ -206,20 +207,30 @@ void process_keyboard_USB(void)
 			ready_to_send = 1;
 	}
 
-	if (is_prog_long_pressed() || is_prog_in_progress())
+	if (is_disco_time())
 	{
 		if (!blinking)
 		{
 			blinking = 1;
-			blink_t = HAL_GetTick();
+			blink_time = HAL_GetTick();
 		}
-		else
-		{
 
+		if (((HAL_GetTick() - blink_time)&(1<<9))&&last_blink)
+		{
+			last_blink = 0;
+			leds_updated = 1;
+			leds_PS2(PS2_LED_CAPS_LOCK);
+		}
+		else if ((!((HAL_GetTick() - blink_time)&(1<<9)))&&(!last_blink))
+		{
+			last_blink = 1;
+			leds_updated = 1;
+			leds_PS2(PS2_LED_NUM_LOCK);
 		}
 	}
 	else if (blinking)
 	{
+		blinking = 0;
 		leds_updated = 1;
 		leds_PS2(leds_data);
 	}
