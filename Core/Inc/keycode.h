@@ -70,6 +70,21 @@ extern const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS];
     { KC_##K78, KC_NO,    KC_##KFA, KC_NO,    KC_##KFC, KC_##KFD, KC_##KFE, KC_NO    }, \
 }
 
+/*
+30 3 my documents
+17 0 my pictures
+16 6 my music
+26 0 media (used)
+	25 0 mail
+	23 2 web/home
+20 5 messenger
+
+	KP_MD,
+	KP_MP,
+	KP_MM,
+	KP_MSG,
+ */
+
 
 
 /* US layout */
@@ -626,5 +641,8 @@ enum internal_special_keycodes {
 	KP_MM,
 	KP_MSG,
 };
+
+#define KP_START KP_MD
+#define KP_END	 KP_MSG
 
 #endif /* INC_KEYCODE_H_ */

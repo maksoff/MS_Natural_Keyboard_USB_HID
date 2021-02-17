@@ -29,6 +29,11 @@
 #include "ps2.h"
 #include "keyboard.h"
 
+#ifdef DEBUG
+#include "SEGGER_RTT.h"
+#endif
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,6 +106,11 @@ int main(void)
   reset_us_counter();
   init_PS2();
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
+
+#ifdef DEBUG
+  SEGGER_RTT_Init();
+#endif
+
 
   /* USER CODE END 2 */
 

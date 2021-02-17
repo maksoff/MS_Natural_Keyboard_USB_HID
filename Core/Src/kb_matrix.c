@@ -9,9 +9,10 @@
 #include "kb_matrix.h"
 #include "keyboard.h"
 #include "keycode.h"
+#include "kb_prog.h"
 
-static void matrix_make(uint8_t code);
-static void matrix_break(uint8_t code);
+void matrix_make(uint8_t code);
+void matrix_break(uint8_t code);
 static void matrix_clear(void);
 
 
@@ -396,8 +397,10 @@ void matrix_make(uint8_t code)
     if (!matrix_is_on(ROW(code), COL(code))) {
 	    matrix[ROW(code)] |= 1<<COL(code);
 	    is_modified = 1;
-		code = keymap_key_to_keycode(ROW(code),COL(code));
-		register_code(code);
+		uint8_t keycode = keymap_key_to_keycode(ROW(code),COL(code));
+		if (!IS_PROG(keycode))
+	    	prog_push_code(code, 1);
+		register_code(keycode);
     }
 
 }
@@ -407,8 +410,10 @@ void matrix_break(uint8_t code)
     if (matrix_is_on(ROW(code), COL(code))) {
         matrix[ROW(code)] &= ~(1<<COL(code));
         is_modified = 1;
-		code = keymap_key_to_keycode(ROW(code),COL(code));
-		unregister_code(code);
+		uint8_t keycode = keymap_key_to_keycode(ROW(code),COL(code));
+		if (!IS_PROG(keycode))
+	    	prog_push_code(code, 0);
+		unregister_code(keycode);
     }
 }
 

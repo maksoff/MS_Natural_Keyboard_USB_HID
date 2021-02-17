@@ -28,7 +28,7 @@ Core/Src/ps2.o: ../Core/Src/ps2.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h \
  ../Core/Inc/tim.h ../Core/Inc/main.h ../Core/Inc/ps2.h \
  ../Core/Inc/gpio.h ../USB_DEVICE/Target/usbd_conf.h \
- ../Core/Inc/kb_matrix.h
+ ../Core/Inc/kb_matrix.h ../Core/Inc/kb_prog.h
 
 ../Core/Inc/main.h:
 
@@ -97,3 +97,5 @@ Core/Src/ps2.o: ../Core/Src/ps2.c ../Core/Inc/main.h \
 ../USB_DEVICE/Target/usbd_conf.h:
 
 ../Core/Inc/kb_matrix.h:
+
+../Core/Inc/kb_prog.h:

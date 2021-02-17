@@ -34,4 +34,7 @@ uint8_t matrix_is_on(uint8_t row, uint8_t col);
 /* matrix state on row */
 matrix_row_t  matrix_get_row(uint8_t row);
 
+void matrix_make(uint8_t code);
+void matrix_break(uint8_t code);
+
 #endif /* INC_KB_MATRIX_H_ */

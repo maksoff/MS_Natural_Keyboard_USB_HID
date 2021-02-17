@@ -33,6 +33,8 @@
 #include "usbd_conf.h"
 #include "kb_matrix.h"
 
+#include "kb_prog.h"
+
 #define PS2_RESET		0xFF
 #define PS2_ACK         0xFA
 #define PS2_RESEND      0xFE
@@ -306,6 +308,7 @@ void process_PS2(void)
 		matrix_scan(buf_pop());
 	else
 		leds_PS2(leds_data);
+	prog_pop_code();
 }
 
 /********************************/

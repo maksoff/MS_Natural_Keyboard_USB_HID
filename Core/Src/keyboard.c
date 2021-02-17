@@ -215,17 +215,23 @@ void process_keyboard_USB(void)
 			blink_time = HAL_GetTick();
 		}
 
-		if (((HAL_GetTick() - blink_time)&(1<<9))&&last_blink)
+		if (((HAL_GetTick() - blink_time)&(1<<8))&&last_blink)
 		{
 			last_blink = 0;
 			leds_updated = 1;
-			leds_PS2(PS2_LED_CAPS_LOCK);
+			if (is_prog_error())
+				leds_PS2(PS2_LED_CAPS_LOCK|PS2_LED_NUM_LOCK);
+			else
+				leds_PS2(PS2_LED_CAPS_LOCK);
 		}
-		else if ((!((HAL_GetTick() - blink_time)&(1<<9)))&&(!last_blink))
+		else if ((!((HAL_GetTick() - blink_time)&(1<<8)))&&(!last_blink))
 		{
 			last_blink = 1;
 			leds_updated = 1;
-			leds_PS2(PS2_LED_NUM_LOCK);
+			if (is_prog_error())
+				leds_PS2(0);
+			else
+				leds_PS2(PS2_LED_NUM_LOCK);
 		}
 	}
 	else if (blinking)

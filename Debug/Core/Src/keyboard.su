@@ -9,8 +9,8 @@ keyboard.c:102:9:keymap_key_to_keycode	16	static
 keyboard.c:108:6:register_code	16	static
 keyboard.c:141:6:unregister_code	16	static
 keyboard.c:189:6:process_keyboard_USB	8	static
-keyboard.c:239:6:USB_HID_buffer_sent_Callback	4	static
-keyboard.c:252:6:kbuf_push	24	static
-keyboard.c:262:9:kbuf_has_data	4	static
-keyboard.c:267:6:kbuf_clear	4	static
-keyboard.c:272:6:send_keyboard_report	8	static
+keyboard.c:245:6:USB_HID_buffer_sent_Callback	4	static
+keyboard.c:258:6:kbuf_push	24	static
+keyboard.c:268:9:kbuf_has_data	4	static
+keyboard.c:273:6:kbuf_clear	4	static
+keyboard.c:278:6:send_keyboard_report	8	static
