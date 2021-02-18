@@ -29,10 +29,6 @@
 #include "ps2.h"
 #include "keyboard.h"
 
-#ifdef DEBUG
-#include "SEGGER_RTT.h"
-#endif
-
 
 /* USER CODE END Includes */
 
@@ -105,10 +101,6 @@ int main(void)
   HAL_GPIO_WritePin(USB_DP_PULL_GPIO_Port, USB_DP_PULL_Pin, 1); // enable pull-up
   reset_us_counter();
   init_PS2();
-
-#ifdef DEBUG
-  SEGGER_RTT_Init();
-#endif
 
 
   /* USER CODE END 2 */

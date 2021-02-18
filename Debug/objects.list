@@ -1,5 +1,3 @@
-"Core/Src/SEGGER_RTT.o"
-"Core/Src/SEGGER_RTT_printf.o"
 "Core/Src/eee.o"
 "Core/Src/gpio.o"
 "Core/Src/kb_matrix.o"

@@ -27,8 +27,7 @@ Core/Src/kb_prog.o: ../Core/Src/kb_prog.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h \
  ../Core/Inc/eee.h ../Core/Inc/keycode.h ../Core/Inc/kb_prog.h \
- ../Core/Inc/kb_matrix.h ../Core/Inc/SEGGER_RTT.h \
- ../Core/Inc/SEGGER_RTT_Conf.h
+ ../Core/Inc/kb_matrix.h
 
 ../Core/Inc/main.h:
 
@@ -93,7 +92,3 @@ Core/Src/kb_prog.o: ../Core/Src/kb_prog.c ../Core/Inc/main.h \
 ../Core/Inc/kb_prog.h:
 
 ../Core/Inc/kb_matrix.h:
-
-../Core/Inc/SEGGER_RTT.h:
-
-../Core/Inc/SEGGER_RTT_Conf.h:

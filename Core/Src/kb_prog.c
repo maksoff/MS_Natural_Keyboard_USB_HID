@@ -11,10 +11,6 @@
 #include "kb_prog.h"
 #include "kb_matrix.h"
 
-#ifdef DEBUG
-#include "SEGGER_RTT.h"
-#endif
-
 static uint8_t programming_in_progress = 0;
 static uint8_t prog_is_running = 0;
 static uint8_t prog_error = 0;
@@ -52,9 +48,6 @@ void prog_push_code(uint8_t code, uint8_t make)
 	uint32_t packet = 0;
 	if (!programming_in_progress)
 		return;
-#ifdef DEBUG
-	SEGGER_RTT_printf(0, "%X \n", code);
-#endif
 	if (current_pos > PROG_MAX_POS - PROG_STEPS_TO_ERROR)
 		prog_error = 1;
 	if (current_pos == PROG_MAX_POS)
