@@ -248,7 +248,6 @@ void leds_PS2(uint8_t led)
 		return; // do nothing if buffer is not clear - user input is more important!
 	leds_updated = 0;
 
-	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
 	for (uint8_t i = 5; i > 0; i--){
 		send_PS2(PS2_SET_LED);
 		if ( wait_response_PS2() != PS2_ACK ) // no ACK, try again
