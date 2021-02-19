@@ -16,7 +16,7 @@ To start programming press & hold button for 3 seconds (leds start blinking). Pr
 Press shortly to play sequence.
 
 Caps <-> Num blinking sequently => Programming
-Caps & Num blinking synchronously => last 5 keystrokes left
+Caps & Num blinking synchronously => last 10 keystrokes left
 
 Used BluePill, added USB_P 1.5k Pull-up to Pin, removed 10k, series Resistor changed to 68R.
 
