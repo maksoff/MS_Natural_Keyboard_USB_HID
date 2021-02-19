@@ -23,6 +23,11 @@ static uint8_t current_code = 0;
 static uint16_t current_pos = 0;
 static uint32_t last_prog_time = 0;
 
+// no "make" codes should be left, all should be "broken"
+// theoretically, we can simply clean the kbd matrix, but it deletes user keys too (e.g. Shift..)
+// if user have pressed any keys while macro plays
+static uint8_t code_to_break[PROG_MAX_POS] = {0};
+
 uint8_t is_prog_error(void) { return prog_error; }
 uint8_t is_prog_in_progress(void) { return programming_in_progress; }
 uint8_t is_prog_long_pressed(void) { return (PROG_LONG_PRESS < (HAL_GetTick() - key_timer)); }
@@ -68,6 +73,13 @@ void prog_push_code(uint8_t code, uint8_t make)
 	EEE_write(current_code - KP_START, current_pos++, ~packet);
 }
 
+void break_unbreaked(void)
+{
+	// go from last to first
+	for (uint16_t i = PROG_MAX_POS; i > 0; i--)
+		if (code_to_break[i-1] != 0)
+			matrix_break(code_to_break[i-1]);
+}
 
 void prog_pop_code(void)
 {
@@ -78,10 +90,29 @@ void prog_pop_code(void)
 	{
 		if ((packet = ~EEE_read(current_code - KP_START, current_pos++)))
 		{
-			if (packet & (1<<8))
-				matrix_make((uint8_t)(packet & 0xFF));
+			uint8_t code = (uint8_t)(packet & 0xFF);
+			if (packet & (1<<8)) // make or break
+			{
+				// find first unused position, and add code here
+				for (uint16_t i = 0; i < PROG_MAX_POS; i++)
+					if (code_to_break[i] == 0)
+					{
+						code_to_break[i] = code;
+						break;
+					}
+				matrix_make(code);
+			}
 			else
-				matrix_break((uint8_t)(packet & 0xFF));
+			{
+				// find first position with code and remove it
+				for (uint16_t i = 0; i < PROG_MAX_POS; i++)
+					if (code_to_break[i] == code)
+					{
+						code_to_break[i] = 0;
+						break;
+					}
+				matrix_break(code);
+			}
 
 			if (current_pos < PROG_MAX_POS)
 			{
@@ -92,6 +123,7 @@ void prog_pop_code(void)
 			}
 		}
 
+		break_unbreaked();
 		prog_is_running = 0;
 		current_pos = 0;
 		next_time = 0;
@@ -99,6 +131,7 @@ void prog_pop_code(void)
 	}
 
 }
+
 
 void reset_prog(void)
 {
@@ -139,6 +172,8 @@ void prog_released(uint8_t code)
 		else
 		{
 			reset_prog();
+			if (prog_is_running)
+				break_unbreaked(); // stopping program
 			prog_is_running = !prog_is_running;
 		}
 	}
