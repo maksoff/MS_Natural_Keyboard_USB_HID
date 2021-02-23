@@ -21,9 +21,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         000001a8  20000000  08008b64  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000b90  200001a8  08008d0c  000201a8  2**3
+  9 .bss          00000d40  200001a8  08008d0c  000201a8  2**3
                   ALLOC
- 10 ._user_heap_stack 00000600  20000d38  08008d0c  00020d38  2**0
+ 10 ._user_heap_stack 00000600  20000ee8  08008d0c  00020ee8  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  000201a8  2**0
                   CONTENTS, READONLY
@@ -1456,9 +1456,9 @@ void matrix_clear(void)
  8000988:	200001d4 	.word	0x200001d4
 
 0800098c <is_prog_error>:
-// no "make" codes should be left, all should be "broken"
-// theoretically, we can simply clean the kbd matrix, but it deletes user keys too (e.g. Shift..)
 // if user have pressed any keys while macro plays
+// also it can be used simple matrix 32xbytes (for 256 keys), but I wanted to break them in
+// reverse order.
 static uint8_t code_to_break[PROG_MAX_POS] = {0};
 
 uint8_t is_prog_error(void) { return prog_error; }
@@ -2108,7 +2108,7 @@ static void send_system(uint16_t data)
  8000d8a:	bd80      	pop	{r7, pc}
  8000d8c:	20000410 	.word	0x20000410
  8000d90:	20000000 	.word	0x20000000
- 8000d94:	20000588 	.word	0x20000588
+ 8000d94:	20000738 	.word	0x20000738
 
 08000d98 <send_consumer>:
 
@@ -2164,7 +2164,7 @@ static void send_consumer(uint16_t data)
  8000de2:	bd80      	pop	{r7, pc}
  8000de4:	20000412 	.word	0x20000412
  8000de8:	20000000 	.word	0x20000000
- 8000dec:	20000588 	.word	0x20000588
+ 8000dec:	20000738 	.word	0x20000738
 
 08000df0 <add_mods>:
 
@@ -2757,8 +2757,8 @@ void process_keyboard_USB(void)
  80011cc:	781b      	ldrb	r3, [r3, #0]
  80011ce:	3301      	adds	r3, #1
  80011d0:	425a      	negs	r2, r3
- 80011d2:	f003 030f 	and.w	r3, r3, #15
- 80011d6:	f002 020f 	and.w	r2, r2, #15
+ 80011d2:	f003 033f 	and.w	r3, r3, #63	; 0x3f
+ 80011d6:	f002 023f 	and.w	r2, r2, #63	; 0x3f
  80011da:	bf58      	it	pl
  80011dc:	4253      	negpl	r3, r2
  80011de:	b2da      	uxtb	r2, r3
@@ -2915,12 +2915,12 @@ void process_keyboard_USB(void)
  80012d4:	20000000 	.word	0x20000000
  80012d8:	20000002 	.word	0x20000002
  80012dc:	20000448 	.word	0x20000448
- 80012e0:	20000588 	.word	0x20000588
+ 80012e0:	20000738 	.word	0x20000738
  80012e4:	20000414 	.word	0x20000414
  80012e8:	20000418 	.word	0x20000418
  80012ec:	2000041c 	.word	0x2000041c
- 80012f0:	200004d9 	.word	0x200004d9
- 80012f4:	200004d8 	.word	0x200004d8
+ 80012f0:	20000689 	.word	0x20000689
+ 80012f4:	20000688 	.word	0x20000688
 
 080012f8 <USB_HID_buffer_sent_Callback>:
 
@@ -2956,8 +2956,8 @@ void kbuf_push(report_keyboard_t *report)
  800131a:	781b      	ldrb	r3, [r3, #0]
  800131c:	3301      	adds	r3, #1
  800131e:	425a      	negs	r2, r3
- 8001320:	f003 030f 	and.w	r3, r3, #15
- 8001324:	f002 020f 	and.w	r2, r2, #15
+ 8001320:	f003 033f 	and.w	r3, r3, #63	; 0x3f
+ 8001324:	f002 023f 	and.w	r2, r2, #63	; 0x3f
  8001328:	bf58      	it	pl
  800132a:	4253      	negpl	r3, r2
  800132c:	73fb      	strb	r3, [r7, #15]
@@ -3091,7 +3091,7 @@ int main(void)
  80013da:	f000 fb5d 	bl	8001a98 <_delay_ms>
 	  process_PS2(); // check if new data from keyboard, or LEDs should be updated on keyboard
  80013de:	e7f7      	b.n	80013d0 <main+0x38>
- 80013e0:	2000051c 	.word	0x2000051c
+ 80013e0:	200006cc 	.word	0x200006cc
  80013e4:	40010800 	.word	0x40010800
 
 080013e8 <SystemClock_Config>:
@@ -3728,8 +3728,8 @@ void SET_LEDS_Callback(uint8_t usb_led)
  8001792:	bc80      	pop	{r7}
  8001794:	4770      	bx	lr
  8001796:	bf00      	nop
- 8001798:	200004d9 	.word	0x200004d9
- 800179c:	200004d8 	.word	0x200004d8
+ 8001798:	20000689 	.word	0x20000689
+ 800179c:	20000688 	.word	0x20000688
 
 080017a0 <USBD_Sleep_Callback>:
 
@@ -3841,7 +3841,7 @@ void leds_PS2(uint8_t led)
  8001836:	46bd      	mov	sp, r7
  8001838:	bd80      	pop	{r7, pc}
  800183a:	bf00      	nop
- 800183c:	200004d9 	.word	0x200004d9
+ 800183c:	20000689 	.word	0x20000689
 
 08001840 <wait_response_PS2>:
 /**
@@ -3955,8 +3955,8 @@ void process_PS2(void)
  80018d4:	bf00      	nop
  80018d6:	bd80      	pop	{r7, pc}
  80018d8:	20000420 	.word	0x20000420
- 80018dc:	200004d9 	.word	0x200004d9
- 80018e0:	200004d8 	.word	0x200004d8
+ 80018dc:	20000689 	.word	0x20000689
+ 80018e0:	20000688 	.word	0x20000688
 
 080018e4 <buf_push>:
 
@@ -4008,7 +4008,7 @@ void buf_push(uint8_t data)
  800192a:	bf00      	nop
  800192c:	20000421 	.word	0x20000421
  8001930:	20000422 	.word	0x20000422
- 8001934:	200004dc 	.word	0x200004dc
+ 8001934:	2000068c 	.word	0x2000068c
 
 08001938 <buf_pop>:
 
@@ -4058,7 +4058,7 @@ uint8_t buf_pop(void)
  800197e:	4770      	bx	lr
  8001980:	20000421 	.word	0x20000421
  8001984:	20000422 	.word	0x20000422
- 8001988:	200004dc 	.word	0x200004dc
+ 8001988:	2000068c 	.word	0x2000068c
 
 0800198c <buf_has_data>:
 
@@ -4332,7 +4332,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
  8001a72:	bf00      	nop
  8001a74:	bd80      	pop	{r7, pc}
  8001a76:	bf00      	nop
- 8001a78:	20000a4c 	.word	0x20000a4c
+ 8001a78:	20000bfc 	.word	0x20000bfc
 
 08001a7c <EXTI9_5_IRQHandler>:
 
@@ -4437,7 +4437,7 @@ inline void reset_us_counter(void)
  8001ae2:	46bd      	mov	sp, r7
  8001ae4:	bc80      	pop	{r7}
  8001ae6:	4770      	bx	lr
- 8001ae8:	2000051c 	.word	0x2000051c
+ 8001ae8:	200006cc 	.word	0x200006cc
 
 08001aec <check_us_counter>:
 
@@ -4465,7 +4465,7 @@ inline uint8_t check_us_counter(uint16_t u16_us)
  8001b0e:	46bd      	mov	sp, r7
  8001b10:	bc80      	pop	{r7}
  8001b12:	4770      	bx	lr
- 8001b14:	2000051c 	.word	0x2000051c
+ 8001b14:	200006cc 	.word	0x200006cc
 
 08001b18 <MX_TIM1_Init>:
 
@@ -4567,7 +4567,7 @@ void MX_TIM1_Init(void)
  8001baa:	3718      	adds	r7, #24
  8001bac:	46bd      	mov	sp, r7
  8001bae:	bd80      	pop	{r7, pc}
- 8001bb0:	2000051c 	.word	0x2000051c
+ 8001bb0:	200006cc 	.word	0x200006cc
  8001bb4:	40012c00 	.word	0x40012c00
 
 08001bb8 <HAL_TIM_Base_MspInit>:
@@ -4693,7 +4693,7 @@ LoopFillZerobss:
   ldr r2, =_sbss
  8001c34:	200001a8 	.word	0x200001a8
   ldr r3, = _ebss
- 8001c38:	20000d38 	.word	0x20000d38
+ 8001c38:	20000ee8 	.word	0x20000ee8
 
 08001c3c <ADC1_2_IRQHandler>:
  * @retval : None
@@ -4841,7 +4841,7 @@ __weak void HAL_IncTick(void)
  8001ce4:	bc80      	pop	{r7}
  8001ce6:	4770      	bx	lr
  8001ce8:	2000000c 	.word	0x2000000c
- 8001cec:	20000564 	.word	0x20000564
+ 8001cec:	20000714 	.word	0x20000714
 
 08001cf0 <HAL_GetTick>:
   * @note  This function is declared as __weak to be overwritten in case of other
@@ -4860,7 +4860,7 @@ __weak uint32_t HAL_GetTick(void)
  8001cfa:	46bd      	mov	sp, r7
  8001cfc:	bc80      	pop	{r7}
  8001cfe:	4770      	bx	lr
- 8001d00:	20000564 	.word	0x20000564
+ 8001d00:	20000714 	.word	0x20000714
 
 08001d04 <HAL_Delay>:
   *       implementations in user file.
@@ -5471,7 +5471,7 @@ HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint
  8002036:	371c      	adds	r7, #28
  8002038:	46bd      	mov	sp, r7
  800203a:	bdf0      	pop	{r4, r5, r6, r7, pc}
- 800203c:	20000568 	.word	0x20000568
+ 800203c:	20000718 	.word	0x20000718
  8002040:	40022000 	.word	0x40022000
 
 08002044 <HAL_FLASH_Unlock>:
@@ -5610,7 +5610,7 @@ static void FLASH_Program_HalfWord(uint32_t Address, uint16_t Data)
  80020da:	bc80      	pop	{r7}
  80020dc:	4770      	bx	lr
  80020de:	bf00      	nop
- 80020e0:	20000568 	.word	0x20000568
+ 80020e0:	20000718 	.word	0x20000718
  80020e4:	40022000 	.word	0x40022000
 
 080020e8 <FLASH_WaitForLastOperation>:
@@ -5832,7 +5832,7 @@ static void FLASH_SetErrorCode(void)
  8002208:	4770      	bx	lr
  800220a:	bf00      	nop
  800220c:	40022000 	.word	0x40022000
- 8002210:	20000568 	.word	0x20000568
+ 8002210:	20000718 	.word	0x20000718
 
 08002214 <HAL_FLASHEx_Erase>:
   *         (0xFFFFFFFF means that all the pages have been correctly erased)
@@ -5996,7 +5996,7 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
  80022de:	46bd      	mov	sp, r7
  80022e0:	bd80      	pop	{r7, pc}
  80022e2:	bf00      	nop
- 80022e4:	20000568 	.word	0x20000568
+ 80022e4:	20000718 	.word	0x20000718
  80022e8:	40022000 	.word	0x40022000
 
 080022ec <FLASH_MassErase>:
@@ -6044,7 +6044,7 @@ static void FLASH_MassErase(uint32_t Banks)
  8002316:	46bd      	mov	sp, r7
  8002318:	bc80      	pop	{r7}
  800231a:	4770      	bx	lr
- 800231c:	20000568 	.word	0x20000568
+ 800231c:	20000718 	.word	0x20000718
  8002320:	40022000 	.word	0x40022000
 
 08002324 <FLASH_PageErase>:
@@ -6094,7 +6094,7 @@ void FLASH_PageErase(uint32_t PageAddress)
  8002356:	bc80      	pop	{r7}
  8002358:	4770      	bx	lr
  800235a:	bf00      	nop
- 800235c:	20000568 	.word	0x20000568
+ 800235c:	20000718 	.word	0x20000718
  8002360:	40022000 	.word	0x40022000
 
 08002364 <HAL_GPIO_Init>:
@@ -20802,7 +20802,7 @@ void MX_USB_DEVICE_Init(void)
  8008258:	bd80      	pop	{r7, pc}
  800825a:	bf00      	nop
  800825c:	20000158 	.word	0x20000158
- 8008260:	20000588 	.word	0x20000588
+ 8008260:	20000738 	.word	0x20000738
  8008264:	20000010 	.word	0x20000010
 
 08008268 <USBD_FS_DeviceDescriptor>:
@@ -20904,7 +20904,7 @@ uint8_t * USBD_FS_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length
  80082de:	46bd      	mov	sp, r7
  80082e0:	bd80      	pop	{r7, pc}
  80082e2:	bf00      	nop
- 80082e4:	2000084c 	.word	0x2000084c
+ 80082e4:	200009fc 	.word	0x200009fc
  80082e8:	08008a08 	.word	0x08008a08
 
 080082ec <USBD_FS_ManufacturerStrDescriptor>:
@@ -20933,7 +20933,7 @@ uint8_t * USBD_FS_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *l
  8008306:	3708      	adds	r7, #8
  8008308:	46bd      	mov	sp, r7
  800830a:	bd80      	pop	{r7, pc}
- 800830c:	2000084c 	.word	0x2000084c
+ 800830c:	200009fc 	.word	0x200009fc
  8008310:	08008a1c 	.word	0x08008a1c
 
 08008314 <USBD_FS_SerialStrDescriptor>:
@@ -21012,7 +21012,7 @@ uint8_t * USBD_FS_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
  8008366:	46bd      	mov	sp, r7
  8008368:	bd80      	pop	{r7, pc}
  800836a:	bf00      	nop
- 800836c:	2000084c 	.word	0x2000084c
+ 800836c:	200009fc 	.word	0x200009fc
  8008370:	08008a30 	.word	0x08008a30
 
 08008374 <USBD_FS_InterfaceStrDescriptor>:
@@ -21056,7 +21056,7 @@ uint8_t * USBD_FS_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *leng
  80083a2:	46bd      	mov	sp, r7
  80083a4:	bd80      	pop	{r7, pc}
  80083a6:	bf00      	nop
- 80083a8:	2000084c 	.word	0x2000084c
+ 80083a8:	200009fc 	.word	0x200009fc
  80083ac:	08008a3c 	.word	0x08008a3c
 
 080083b0 <Get_SerialNum>:
@@ -21579,7 +21579,7 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
  800867e:	3708      	adds	r7, #8
  8008680:	46bd      	mov	sp, r7
  8008682:	bd80      	pop	{r7, pc}
- 8008684:	20000a4c 	.word	0x20000a4c
+ 8008684:	20000bfc 	.word	0x20000bfc
  8008688:	40005c00 	.word	0x40005c00
 
 0800868c <USBD_LL_Start>:

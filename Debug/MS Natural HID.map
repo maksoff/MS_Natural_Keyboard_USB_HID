@@ -18,7 +18,7 @@ hUsbDeviceFS        0x2c4             USB_DEVICE/App/usb_device.o
 keyboard_report     0x9               Core/Src/keyboard.o
 uwTick              0x4               Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
 pFlash              0x20              Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
-kbuf                0x90              Core/Src/keyboard.o
+kbuf                0x240             Core/Src/keyboard.o
 leds_data           0x1               Core/Src/keyboard.o
 leds_updated        0x1               Core/Src/keyboard.o
 htim1               0x48              Core/Src/tim.o
@@ -5147,7 +5147,7 @@ LOAD c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .igot.plt      0x00000000200001a8        0x0 c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/crtbegin.o
                 0x00000000200001a8                . = ALIGN (0x4)
 
-.bss            0x00000000200001a8      0xb90 load address 0x0000000008008d0c
+.bss            0x00000000200001a8      0xd40 load address 0x0000000008008d0c
                 0x00000000200001a8                _sbss = .
                 0x00000000200001a8                __bss_start__ = _sbss
  *(.bss)
@@ -5226,40 +5226,40 @@ LOAD c:/st/stm32cubeide_1.5.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  *fill*         0x0000000020000427        0x1 
  .bss.mem.8216  0x0000000020000428       0x14 USB_DEVICE/Target/usbd_conf.o
  *(COMMON)
- COMMON         0x000000002000043c       0x9e Core/Src/keyboard.o
+ COMMON         0x000000002000043c      0x24e Core/Src/keyboard.o
                 0x000000002000043c                keyboard_report
                 0x0000000020000448                kbuf
-                0x00000000200004d8                leds_data
-                0x00000000200004d9                leds_updated
- *fill*         0x00000000200004da        0x2 
- COMMON         0x00000000200004dc       0x40 Core/Src/ps2.o
-                0x00000000200004dc                pbuf
- COMMON         0x000000002000051c       0x48 Core/Src/tim.o
-                0x000000002000051c                htim1
- COMMON         0x0000000020000564        0x4 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x0000000020000564                uwTick
- COMMON         0x0000000020000568       0x20 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
-                0x0000000020000568                pFlash
- COMMON         0x0000000020000588      0x2c4 USB_DEVICE/App/usb_device.o
-                0x0000000020000588                hUsbDeviceFS
- COMMON         0x000000002000084c      0x200 USB_DEVICE/App/usbd_desc.o
-                0x000000002000084c                USBD_StrDesc
- COMMON         0x0000000020000a4c      0x2ec USB_DEVICE/Target/usbd_conf.o
-                0x0000000020000a4c                hpcd_USB_FS
-                0x0000000020000d38                . = ALIGN (0x4)
-                0x0000000020000d38                _ebss = .
-                0x0000000020000d38                __bss_end__ = _ebss
+                0x0000000020000688                leds_data
+                0x0000000020000689                leds_updated
+ *fill*         0x000000002000068a        0x2 
+ COMMON         0x000000002000068c       0x40 Core/Src/ps2.o
+                0x000000002000068c                pbuf
+ COMMON         0x00000000200006cc       0x48 Core/Src/tim.o
+                0x00000000200006cc                htim1
+ COMMON         0x0000000020000714        0x4 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x0000000020000714                uwTick
+ COMMON         0x0000000020000718       0x20 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x0000000020000718                pFlash
+ COMMON         0x0000000020000738      0x2c4 USB_DEVICE/App/usb_device.o
+                0x0000000020000738                hUsbDeviceFS
+ COMMON         0x00000000200009fc      0x200 USB_DEVICE/App/usbd_desc.o
+                0x00000000200009fc                USBD_StrDesc
+ COMMON         0x0000000020000bfc      0x2ec USB_DEVICE/Target/usbd_conf.o
+                0x0000000020000bfc                hpcd_USB_FS
+                0x0000000020000ee8                . = ALIGN (0x4)
+                0x0000000020000ee8                _ebss = .
+                0x0000000020000ee8                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x0000000020000d38      0x600 load address 0x0000000008008d0c
-                0x0000000020000d38                . = ALIGN (0x8)
+                0x0000000020000ee8      0x600 load address 0x0000000008008d0c
+                0x0000000020000ee8                . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
-                0x0000000020000d38                PROVIDE (_end = .)
-                0x0000000020000f38                . = (. + _Min_Heap_Size)
- *fill*         0x0000000020000d38      0x200 
-                0x0000000020001338                . = (. + _Min_Stack_Size)
- *fill*         0x0000000020000f38      0x400 
-                0x0000000020001338                . = ALIGN (0x8)
+                0x0000000020000ee8                PROVIDE (_end = .)
+                0x00000000200010e8                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020000ee8      0x200 
+                0x00000000200014e8                . = (. + _Min_Stack_Size)
+ *fill*         0x00000000200010e8      0x400 
+                0x00000000200014e8                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)

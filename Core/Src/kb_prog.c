@@ -26,6 +26,8 @@ static uint32_t last_prog_time = 0;
 // no "make" codes should be left, all should be "broken"
 // theoretically, we can simply clean the kbd matrix, but it deletes user keys too (e.g. Shift..)
 // if user have pressed any keys while macro plays
+// also here can be used simple matrix 32xbytes (for 256 keys), but I wanted to break them in
+// reverse order.
 static uint8_t code_to_break[PROG_MAX_POS] = {0};
 
 uint8_t is_prog_error(void) { return prog_error; }

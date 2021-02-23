@@ -174,7 +174,7 @@ void unregister_code(uint8_t code)
 
 
 /* buffer for keyboard */
-#define KBUF_SIZE 16
+#define KBUF_SIZE 64
 report_keyboard_t kbuf[KBUF_SIZE];
 uint8_t kbuf_head = 0;
 uint8_t kbuf_tail = 0;
