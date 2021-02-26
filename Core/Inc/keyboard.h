@@ -25,6 +25,8 @@ typedef union {
     };
 }  __attribute__ ((packed)) report_keyboard_t;
 
+uint8_t get_mods(void);
+
 void process_keyboard_USB(void);
 uint8_t keymap_key_to_keycode(uint8_t row, uint8_t col);
 

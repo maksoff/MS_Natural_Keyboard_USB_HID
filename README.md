@@ -12,8 +12,9 @@ Logoff key mapped to Win+L (I couldn't find any HID code for this function... St
 Time quanting = 64ms, max Time = 6 days.
 
 To start programming press & hold button for 3 seconds (leds start blinking). Press again to finish. 
+If programming started with left Ctrl -> macro recorded with 2x speed. If pressed with right Ctrl -> macro recorded at max speed (64ms delay between keypresses)
 
-Press shortly to play sequence.
+Press shortly to play sequence. (left Ctrl -> 2x speed, right Ctrl -> max speed (64ms))
 
 Caps <-> Num blinking sequently => Programming
 Caps & Num blinking synchronously => last 10 keystrokes left

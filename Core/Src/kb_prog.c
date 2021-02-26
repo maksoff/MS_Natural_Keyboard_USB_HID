@@ -8,6 +8,7 @@
 #include "main.h"
 #include "eee.h"
 #include "keycode.h"
+#include "keyboard.h"
 #include "kb_prog.h"
 #include "kb_matrix.h"
 
@@ -22,6 +23,8 @@ static uint32_t next_time = 0;
 static uint8_t current_code = 0;
 static uint16_t current_pos = 0;
 static uint32_t last_prog_time = 0;
+
+static uint8_t current_mods = 0;
 
 // no "make" codes should be left, all should be "broken"
 // theoretically, we can simply clean the kbd matrix, but it deletes user keys too (e.g. Shift..)
@@ -64,7 +67,15 @@ void prog_push_code(uint8_t code, uint8_t make)
 		packet = HAL_GetTick() - last_prog_time;
 		if (packet >= (1 << 23))
 			packet = ~0;
-		packet = (packet >> PROG_TIME_MULT) << 9; // divide 64 and shift time to the right
+		packet >>= PROG_TIME_MULT;
+		if (current_mods & (MOD_BIT(KC_LCTRL)))
+		{
+			packet >>= SPEEDY_CLICKY;
+		} else if (current_mods & (MOD_BIT(KC_RCTRL)))
+		{
+			packet = 0;
+		}
+		packet = (packet) << 9; // divide 64 and shift time to the right
 	}
 	if (packet == 0)
 		packet = (1<<9);
@@ -119,9 +130,23 @@ void prog_pop_code(void)
 			if (current_pos < PROG_MAX_POS)
 			{
 				packet = ~EEE_read(current_code - KP_START, current_pos);
-				next_time = HAL_GetTick() + ((packet>>9)<<PROG_TIME_MULT);
 				if (packet)
+				{
+					packet >>= 9;
+					if (current_mods & (MOD_BIT(KC_LCTRL)))
+					{
+						packet <<= (PROG_TIME_MULT - SPEEDY_CLICKY);
+					} else if (current_mods & (MOD_BIT(KC_RCTRL)))
+					{
+						packet = 1 << PROG_TIME_MULT;
+					} else {
+						packet <<= PROG_TIME_MULT;
+					}
+					if (packet < (1 << PROG_TIME_MULT))
+						packet = 1 << PROG_TIME_MULT;
+					next_time = HAL_GetTick() + packet;
 					return; // completed successfully, wait next step
+				}
 			}
 		}
 
@@ -150,12 +175,14 @@ void prog_pressed(uint8_t code)
 	// TODO detect if we are in programming or program is running, and compare code
 	if (programming_in_progress && (code != current_code))
 		return; // ignore key_press from over keys
+	current_mods = get_mods();
 	current_code = code; // remember this code!
 	key_timer = HAL_GetTick();
 }
 
 void prog_released(uint8_t code)
 {
+	static uint32_t wait_ctrl = 0;
 	if (code != current_code)
 		return; // we are in programming, ignore other prog buttons
 	if (key_timer && (PROG_LONG_PRESS < (HAL_GetTick() - key_timer)))
@@ -175,8 +202,16 @@ void prog_released(uint8_t code)
 		{
 			reset_prog();
 			if (prog_is_running)
+			{
 				break_unbreaked(); // stopping program
-			prog_is_running = !prog_is_running;
+				prog_is_running = 0;
+			} else {
+				// before starting program, wait for a sec to ctrl be released
+				wait_ctrl = HAL_GetTick();
+				while((HAL_GetTick()-wait_ctrl < 1000) &&
+						(get_mods()&(MOD_BIT(KC_LCTRL)|MOD_BIT(KC_RCTRL))));
+				prog_is_running = 1;
+			}
 		}
 	}
 	key_timer = 0;

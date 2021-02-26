@@ -26,6 +26,10 @@ typedef struct  {
 	uint16_t usage;
 } __attribute__ ((packed))  report_extra_t;
 
+uint8_t get_mods(void) {
+	return mods;
+}
+
 static void send_system(uint16_t data)
 {
 	static uint16_t last_data = 0;
