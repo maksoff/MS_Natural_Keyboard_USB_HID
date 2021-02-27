@@ -182,7 +182,6 @@ void prog_pressed(uint8_t code)
 
 void prog_released(uint8_t code)
 {
-	static uint32_t wait_ctrl = 0;
 	if (code != current_code)
 		return; // we are in programming, ignore other prog buttons
 	if (key_timer && (PROG_LONG_PRESS < (HAL_GetTick() - key_timer)))
@@ -206,10 +205,6 @@ void prog_released(uint8_t code)
 				break_unbreaked(); // stopping program
 				prog_is_running = 0;
 			} else {
-				// before starting program, wait for a sec to ctrl be released
-				wait_ctrl = HAL_GetTick();
-				while((HAL_GetTick()-wait_ctrl < 1000) &&
-						(get_mods()&(MOD_BIT(KC_LCTRL)|MOD_BIT(KC_RCTRL))));
 				prog_is_running = 1;
 			}
 		}
