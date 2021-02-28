@@ -10,6 +10,8 @@
 
 #define PROG_LONG_PRESS (3000)
 
+#define WAIT_CTRL (1000) // wait 1 sec for ctrl to be released
+
 #define PROG_MAX_POS (PAGE_SIZE*PAGES_PRO_PROGRAM/sizeof(uint32_t))
 #define PROG_TIME_MULT (6) // 2^6 = 64ms
 #define SPEEDY_CLICKY (1) // 2^1 -> two times
