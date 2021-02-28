@@ -331,7 +331,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_TRANSPARENT  1
 #define KC_TRNS KC_TRANSPARENT
 
+/*
+ * raw codes of ctrl
+ */
 
+#define RAW_LCTRL (0x14)
+#define RAW_RCTRL (0x94)
 
 /* USB HID Keyboard/Keypad Usage(0x07) */
 enum hid_keyboard_keypad_usage {

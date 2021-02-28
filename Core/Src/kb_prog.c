@@ -62,6 +62,12 @@ void prog_push_code(uint8_t code, uint8_t make)
 		prog_error = 1;
 	if (current_pos == PROG_MAX_POS)
 		return;
+	if (current_pos == 0)
+	{
+		// if first key = release from ctrl, ignore it!
+		if ((!make)&&((code==RAW_LCTRL)||(code==RAW_RCTRL)))
+			return;
+	}
 	if (last_prog_time)
 	{
 		packet = HAL_GetTick() - last_prog_time;
@@ -96,9 +102,23 @@ void break_unbreaked(void)
 
 void prog_pop_code(void)
 {
+	static uint32_t ctrl_delay = 0;
 	uint32_t packet;
 	if (!prog_is_running)
 		return;
+	// check if we need first pop, but key is still pressed
+	if (current_pos == 0)
+	{
+		// first position, check if Ctrl is still hold
+		if (get_mods()&(MOD_BIT(KC_LCTRL)|MOD_BIT(KC_RCTRL)))
+		{
+			if (!ctrl_delay)
+				ctrl_delay = HAL_GetTick(); // initialize delay
+			if (HAL_GetTick() - ctrl_delay < WAIT_CTRL)
+				return;
+		}
+		ctrl_delay = 0;
+	}
 	if (next_time < HAL_GetTick())
 	{
 		if ((packet = ~EEE_read(current_code - KP_START, current_pos++)))
