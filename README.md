@@ -13,7 +13,6 @@ Time quanting = 64ms, max Time = 6 days.
 
 To start programming press & hold button for 3 seconds (leds start blinking). Press again to finish. 
 If programming started with left Ctrl -> macro recorded with 2x speed. If pressed with right Ctrl -> macro recorded at max speed (64ms delay between keypresses)
-(Ctrl should be released before Macro key is released)
 
 Press shortly to play sequence. (left Ctrl -> 2x speed, right Ctrl -> max speed (64ms))
 
