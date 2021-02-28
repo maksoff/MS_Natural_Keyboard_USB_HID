@@ -12,6 +12,7 @@
 
 #define PROG_MAX_POS (PAGE_SIZE*PAGES_PRO_PROGRAM/sizeof(uint32_t))
 #define PROG_TIME_MULT (6) // 2^6 = 64ms
+#define SPEEDY_CLICKY (1) // 2^1 -> two times
 
 #define PROG_STEPS_TO_ERROR (20)
 
